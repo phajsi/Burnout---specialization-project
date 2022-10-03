@@ -1,0 +1,177 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %Pakker og instillinger for dokumentet%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[pdftex, 11pt, english, a4paper, twoside]{report} %%{article} 
+\setcounter{secnumdepth}{4} % makes a number for \subsubsection
+
+%\documentclass[pdftex, 10pt, english, a4paper, twoside, twocolumn]{article}
+
+%\documentclass[5p,sort&compress]{elsarticle}		
+% 5p gir 2 kolonner pr side. 1p gir 1 kolonne pr side.
+% Valget sort&compress gjør at referansen [1,2,3] settes som [1-3]. 
+% Andre innstillinger for "klassen" elsarticle finnes i dokumentasjonen på CTAN (http://www.ctan.org/pkg/elsarticle)
+
+\usepackage[margin=1in, tmargin=1.2in, bmargin=1.2in]{geometry}
+
+\usepackage[english]{babel} %Legger til norske bokstaver
+
+%\selectlanguage{norsk}%Får latex til å bruke norsk på steder der latex selv skriver ting. F.eks. Figur istedet for Figure	
+
+
+\usepackage[T1]{fontenc} %Definerer hvilken font som skal brukes. For spesielt interesserte er dette en 8-bit encoding med fonter som bruker 256 glyfer
+%\usepackage{times} %ev. charter er også en fin font :)
+\usepackage{charter}
+\renewcommand{\baselinestretch}{1.15} %fikser linjeavtstand %1.25 før 
+
+\usepackage{pdfpages}
+
+\usepackage[utf8]{inputenc}%Tillater deg å skrive norske bokstaver direkte fra tastaturet, i steden for å bruke kommandoer.		
+\usepackage{graphicx, subcaption, ragged2e} % Nødvendig for å legge til bilder osv. 
+% subcaption gjør at man kan dele opp figurer i a) og b) :D
+
+%\usepackage{titleps} % for å lage top and bottom border :)
+
+\usepackage[section]{placeins}
+\usepackage{cancel}% for å kunne "stryke over" ting i ligninger feks \frac{\bcancel{b}}{\bcancel{b}} = 1
+\usepackage{fmtcount}
+\usepackage{siunitx} % Lar deg bruke kommandoene \SI{tall}{\enhet} og \si{\enhet}. feks \si{\milli\gram\per\liter}. Dette er en veldig fin måte for å få konsistene enheter på. 
+\usepackage{booktabs}% lar deg bruke \toprule, \midrule og \bottomrule i tabeller for å lage pene tabeller.								
+\usepackage{multirow}% Lar deg lage rader inni radene i en tabell.
+\usepackage{listings}
+%\usepackage[showframe=true]{geometry}
+%\usepackage{changepage}????????
+
+\usepackage{floatrow}% får flere figurer til å settes sammen
+%\usepackage[document]{ragged2e}
+
+\usepackage[pdftex,bookmarks,breaklinks]{hyperref}
+
+\usepackage{scrextend} % for å kunne referere til footnotes flere ganger i en tabell
+
+\usepackage{rotating} %Gir deg en rekke muligheter for å rotere ting
+\usepackage	{amsmath , amsfonts , amssymb}							
+%\usepackage[hang,footnotesize,bf]{caption}% Gjør at captions under figurer og over tabeller blir pene.	
+
+\usepackage[version=3]{mhchem} % Tillater deg å skrive kjemiske formler
+\usepackage{epstopdf}% Omgjør .eps-filer til .pdf filer. Denne pakken er genial når man bruker chemdraw der man kan eksportere som eps. 
+\usepackage{textcomp,gensymb}
+\usepackage{float}% Tillater å bruke stor H i floats, dette kalles ofte for float of doom og er sjeldent anbefalt.
+
+%\usepackage[super,square]{natbib}% Denne pakken er for bibliografien, super og square gjør at sitatet opphøyen og inlemmes av firkantparanteser. 
+
+\usepackage{fancyhdr}% Lar deg lage den fine headeren på toppen av siden.
+%\pagestyle{plain}
+\pagestyle{fancy}
+
+%\usepackage[Glenn]{fncychap}
+%\ChRuleWidth{0.5pt}
+%\ChTitleAsIs
+%\ChTitleVar{\Huge\rm} %\rm = roman
+%\ChTitleVar{\bfseries\Large\rm} %%% EXTRA
+\usepackage[Lenny]{fncychap}
+\ChNameVar{\fontsize{14}{16}\usefont{OT1}{phv}{m}{n}\selectfont}
+\ChNumVar{\fontsize{60}{62}\usefont{OT1}{ptm}{m}{n}\selectfont}
+\ChTitleVar{\Huge\bfseries\rm}
+\ChRuleWidth{1pt}
+
+\fancyhf[lh, rh, ch]{} 
+\fancyhf[leh]{\leftmark} %lager header på venstre sida % nåværende chapter på venstre sida
+\fancyhf[roh]{\rightmark} %lager header på høyre sida % nåværende section på høyre sida
+
+%\fancyfoot{} 
+%\fancyfoot[LE,RO]{\thepage} %%%%%%%%%%%%%%%%%%% FUNKER IKKE :/ Bare dropper det...
+%\fancyfoot[LO,RE]{User Guide}
+
+\usepackage{tikz}
+
+\usepackage{siunitx}
+
+\usepackage{appendix}
+
+\usepackage[style=apa , sorting=nyt]{biblatex}
+%\usepackage[style=authoryear, backend=bibtex]{biblatex}
+\addbibresource{bibliography.bib}
+%\addbibresource{references.bib}
+
+%\usepackage[toc]{glossaries}
+
+\usepackage{xcolor}
+\usepackage{longtable}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Setter noen instillinger for å gjøre ting pent :) 
+\setlength\headheight{22.5pt}	
+\floatstyle{plaintop}													
+\restylefloat{table}													
+\floatstyle{plain}														
+\restylefloat{figure}													
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Denne kodebiten lager en egen funksjon som heter \signature{}{} med input sted og navn. Den brukes litt lengre ned i koden
+\newcommand{\signature}[2]{
+\begin{minipage}[t]{0.9\textwidth}
+\vspace{1cm}
+
+    #1, \today
+\vspace{1.5cm}
+
+\setlength\parindent{0pt}
+\begin{tabular}{cc}
+    \rule{6cm}{1pt} & \hspace{2cm} \\
+    #2 & 
+\end{tabular}
+\vspace{1cm}
+\end{minipage}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\makeglossaries
+
+%\newacronym{SPI}{SPI}{Soy Protein Isolate}
+
+\begin{document}
+
+\input{Rapport/1-Abstract++/001-title}
+%\input{Rapport/1-Abstract++/002 - Acknowledgement}
+%\input{Rapport/1-Abstract++/003 - Abstract}
+%\input{Rapport/1-Abstract++/004 - Lists}
+\tableofcontents
+
+\input{Rapport/Chapters/Introduction}
+\input{Rapport/Chapters/Problem Definition}
+\input{Rapport/Chapters/Literature Review}
+\input{Rapport/Chapters/Co-Design Workshop}
+\input{Rapport/Chapters/Interviews}
+\input{Rapport/Chapters/Discussion}
+\input{Rapport/Chapters/Conclusion}
+
+
+
+\vfill % Gjør at signaturen havner nederst på siden, uavhengig av hvor mye tekst det er på den. Dette er en god praksis
+
+%\twocolumn[
+%\begin{@twocolumnfalse}
+
+%\bibliographystyle{unsrtnat}%Definerer bibliografistil
+
+%\addbibresource{bibliography.bib}
+
+%\bibliography{bibliography.bib} %navnet i krøllparantesene er navnet på .bib filen til bibliografien
+
+\printbibliography
+
+%Vedleggene skal alltid komme etter referanselisten og skal plasseres i en egen fil, på en ny side. Derfor brukes \newpage
+%\end{@twocolumnfalse}]
+
+\appendix
+
+%\input{Bilag/AppendixA}
+\newpage
+\cleardoublepage
+
+\end{document} 
