@@ -55,7 +55,7 @@
     linkcolor=blue,
     filecolor=blue,      
     urlcolor=blue,
-    citecolor=blue
+    citecolor=black
     }
     
 \usepackage{mfirstuc}
@@ -112,6 +112,7 @@
 
 \usepackage{xcolor}
 \usepackage{longtable}
+\usepackage{pdfpages}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Setter noen instillinger for å gjøre ting pent :) 
@@ -143,6 +144,15 @@
 \vspace{1cm}
 \end{minipage}
 }
+
+% MAKING CHAPTER HEADER SMALLER
+\usepackage{etoolbox}
+\tracingpatches
+\makeatletter
+\newcommand{\makeCondensedChap}{%
+\patchcmd{\@makeschapterhead}{\vspace*{50\p@}}{}{}{}%
+\patchcmd{\@makeschapterhead}{\vskip 40\p@}{}{}{}%
+}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %\makeglossaries
@@ -159,11 +169,11 @@
 
 \input{Rapport/Chapters/Introduction}
 \input{Rapport/Chapters/Problem Definition}
-%\input{Rapport/Chapters/Literature Review}
+\input{Rapport/Chapters/Literature Review}
 %\input{Rapport/Chapters/Co-Design Workshop}
-%\input{Rapport/Chapters/Interviews}
-\input{Rapport/Chapters/Discussion}
-\input{Rapport/Chapters/Conclusion}
+\input{Rapport/Chapters/Interviews}
+%\input{Rapport/Chapters/Discussion}
+%\input{Rapport/Chapters/Conclusion}
 
 
 
@@ -183,9 +193,9 @@
 %Vedleggene skal alltid komme etter referanselisten og skal plasseres i en egen fil, på en ny side. Derfor brukes \newpage
 %\end{@twocolumnfalse}]
 
-\appendix
+\addappendix
 
-%\input{Bilag/AppendixA}
+\input{Appendix/AppendixA}
 \newpage
 \cleardoublepage
 
